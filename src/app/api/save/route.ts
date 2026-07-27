@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     if (action === 'save') {
       const { error } = await supabase
         .from('saved_articles')
-        .insert({ user_id: user.id, article_id: articleId });
+        .insert({ user_id: user.id, article_id: articleId, status: 'saved' });
 
       // Ignore uniqueness constraint errors (already saved)
       if (error && error.code !== '23505') throw error;

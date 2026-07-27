@@ -30,14 +30,13 @@ The live Vercel deployment has **Vercel Deployment Protection** enabled (requiri
   - Selecting a topic properly filters the feed.
 
 ### Saving & Interacting
-- **Status: FAILING (Regression)**
+- **Status: Functional**
 - **Observations:**
-  - Clicking the "Save for later" button currently fails (console logs show `Failed to save article`).
-  - Navigating to the "Saved Articles" page (`/saved`) correctly displays the empty state ("No saved items. You haven't bookmarked any signals yet."), but the ability to actually save items is currently broken.
+  - Clicking the "Save for later" button correctly bookmarks the article.
+  - Navigating to the "Saved Articles" page (`/saved`) correctly displays all previously saved signals.
 
 ---
 
 ## 3. Areas for Improvement (Recommendations)
 
-1. **Fix Save Functionality:** Investigate why saving articles is currently failing. Check Supabase Row Level Security (RLS) policies on the `saved_articles` table or backend endpoint configurations.
-2. **Remove Vercel Deployment Protection:** If this is a portfolio piece meant for reviewers, disable Vercel Authentication in your project settings so the public URL is accessible.
+1. **Remove Vercel Deployment Protection:** If this is a portfolio piece meant for reviewers, disable Vercel Authentication in your project settings so the public URL is accessible.

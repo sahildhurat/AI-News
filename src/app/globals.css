@@ -10,6 +10,8 @@
   --color-on-secondary: #490080;
   --color-tertiary: #4fdbc8;
   --color-on-tertiary: #003731;
+  --color-error: #ff5252;
+  --color-on-error: #4d0000;
   --color-background: #020617; /* Deep Slate base */
   --color-on-background: #e1e2ec;
   --color-outline: #8c909f;

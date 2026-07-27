@@ -48,7 +48,7 @@ export default async function LoginPage(props: {
           </div>
           
           {searchParams?.message && (
-            <div className="mt-6 p-4 bg-tertiary/10 text-tertiary text-sm font-medium text-center rounded-xl border border-tertiary/20">
+            <div className="mt-6 p-4 bg-error/10 text-error text-sm font-medium text-center rounded-xl border border-error/20">
               {searchParams.message}
             </div>
           )}

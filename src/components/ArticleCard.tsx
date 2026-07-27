@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ExternalLink } from 'lucide-react';
 import SaveButton from './SaveButton';
@@ -15,18 +18,20 @@ type ArticleCardProps = {
 };
 
 export default function ArticleCard({ article, isSaved = false }: ArticleCardProps) {
+  const [imgError, setImgError] = useState(false);
   const timeAgo = formatDistanceToNow(new Date(article.published_at), { addSuffix: true });
 
   return (
     <div className="group flex flex-col md:flex-row gap-5 p-6 glass rounded-2xl hover:glass-hover hover:-translate-y-1 transition-all duration-300">
       {/* Optional Image Area */}
-      {article.image_url ? (
+      {article.image_url && !imgError ? (
         <div className="md:w-1/4 h-48 md:h-auto rounded-xl overflow-hidden bg-surface-bright flex-shrink-0 relative">
           <img 
             src={article.image_url} 
             alt={article.title} 
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
+            onError={() => setImgError(true)}
           />
           <div className="absolute inset-0 border border-white/10 rounded-xl pointer-events-none"></div>
         </div>

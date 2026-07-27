@@ -43,6 +43,10 @@ export async function GET(request: Request) {
       
       const response = await fetch(url);
       if (!response.ok) {
+        if (response.status === 429) {
+          console.warn('GNews API rate limit reached. Halting ingestion loop.');
+          break; // Stop fetching more topics
+        }
         console.error(`Failed to fetch for topic ${topic.label}:`, response.statusText);
         continue; // Skip this topic and proceed to the next
       }
@@ -51,9 +55,24 @@ export async function GET(request: Request) {
       const articles = data.articles || [];
 
       for (const article of articles) {
+        // 3. Trigram Deduplication
+        const { data: isSimilar, error: simError } = await supabase.rpc('check_similar_article_exists', { 
+            p_title: article.title, 
+            threshold: 0.65 
+        });
+
+        if (simError) {
+          console.error(`Error checking similarity for: ${article.title}`, simError);
+        }
+
+        if (isSimilar) {
+           console.log(`Skipping fuzzy duplicate: ${article.title}`);
+           continue;
+        }
+
         const contentHash = generateHash(article.title);
 
-        // 3. Deduplicate and Insert
+        // 4. Insert New Article
         const { data: insertedArticle, error: insertError } = await supabase
           .from('articles')
           .insert({

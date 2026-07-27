@@ -104,7 +104,7 @@ export default async function Home(props: {
               <div className="text-center py-32 glass rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 to-transparent"></div>
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-display font-bold text-on-surface">No pulse detected</h3>
+                  <h3 className="text-2xl font-display font-bold text-on-surface">No news detected</h3>
                   <p className="mt-4 text-lg text-on-surface-variant max-w-md mx-auto">
                     {user && followedTopicIds.size === 0 && !selectedTopicSlug 
                       ? "You aren't tracking any topics yet. Select a node above to begin ingestion."

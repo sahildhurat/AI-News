@@ -1,4 +1,4 @@
-# Evaluation Plan for Pulse (AI News Tracker)
+# Evaluation Plan for AI News
 
 ## 1. Authentication & Onboarding
 - [ ] Users can sign up and log in (Magic Link or similar as per implementation).

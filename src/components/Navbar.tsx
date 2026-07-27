@@ -10,7 +10,7 @@ export default async function Navbar() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-2xl font-display font-extrabold tracking-tight text-primary hover:text-primary-container transition-colors">
-            Pulse.
+            AI News.
           </Link>
           {user && (
             <Link href="/saved" className="text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-2">

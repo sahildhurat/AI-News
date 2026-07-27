@@ -1,4 +1,4 @@
-# Pulse AI News Tracker - Evaluation Report
+# AI News - Evaluation Report
 
 ## 1. Environment Note
 **Live Deployment:** https://ai-newss-spd2.vercel.app/

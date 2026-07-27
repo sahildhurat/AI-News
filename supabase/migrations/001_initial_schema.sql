@@ -1,4 +1,4 @@
--- Pulse Supabase Migration: 001_initial_schema.sql
+-- AI News Supabase Migration: 001_initial_schema.sql
 
 -- Topics Table
 CREATE TABLE topics (

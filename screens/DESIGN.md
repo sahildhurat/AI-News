@@ -129,7 +129,7 @@ The layout follows a **Fluid Grid** model with a 12-column structure for desktop
 - **Tablet:** 8 columns, 20px gutters, 24px side margins.
 - **Mobile:** 4 columns, 16px gutters, 16px side margins.
 
-The spacing rhythm is strictly based on an **8px base unit**. Significant whitespace is used around featured news "Pulses" to prevent visual clutter, while data-heavy sidebars utilize tighter 4px and 8px increments.
+The spacing rhythm is strictly based on an **8px base unit**. Significant whitespace is used around featured news items to prevent visual clutter, while data-heavy sidebars utilize tighter 4px and 8px increments.
 
 ## Elevation & Depth
 Depth is created through **Glassmorphism** rather than traditional drop shadows. 
@@ -162,5 +162,5 @@ The shape language is consistently **Rounded**.
 - **Checkboxes:** Square with 4px border-radius. Active state uses a Primary Blue fill with a white checkmark.
 
 ### AI Indicators
-- **Pulse-Line:** A thin, animated SVG line using a gradient of Primary to Secondary colors, used to indicate live data streaming or AI processing.
+- **Live-Line:** A thin, animated SVG line using a gradient of Primary to Secondary colors, used to indicate live data streaming or AI processing.
 - **Sentiment Chips:** Pill-shaped with low-opacity fills (e.g., Teal for positive, Red for negative) and high-saturation text.

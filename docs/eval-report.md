@@ -6,48 +6,38 @@ The live Vercel deployment has **Vercel Deployment Protection** enabled (requiri
 
 ---
 
-## 2. Feature Evaluation
+## 2. Feature Evaluation (Post-Improvements)
 
 ### Core Feed & Reading Experience
-- **Status: Functional**
+- **Status: Functional & Polished**
 - **Observations:**
   - The feed successfully loads and displays recent AI news articles.
   - Articles show appropriate metadata: Title, Publisher/Source (e.g., "NEWSBYTES"), relative publish time (e.g., "about 17 hours ago").
-  - The UI is clean, scannable, and adheres to a premium dark-mode aesthetic.
-- **Issues Found:**
-  - **Broken Images:** Some articles in the feed (e.g., when filtering by "AI Agents") had broken images, falling back to raw alt-text. This happens because GNews image URLs sometimes expire or fail to load.
+  - **Deduplication:** Trigram deduplication is successfully keeping the feed clean of duplicate stories.
+  - **Images:** Graceful image fallbacks are now fully working. Articles with broken image links correctly fall back to a publisher-branded gradient block instead of an ugly broken image icon.
 
 ### Authentication
-- **Status: Functional (with UX hiccups)**
+- **Status: Functional**
 - **Observations:**
   - The "Sign In" flow uses an Email/Password modal.
-  - Successfully signing in updates the navigation bar, displaying a "Saved Articles" link and replacing "Sign In" with "Sign Out".
-- **Issues Found:**
-  - **Error Handling:** During the signup/signin flow, a misleading error message ("Could not authenticate user. Check your credentials.") temporarily appeared before successfully routing the user. The error message is rendered in a green box instead of standard error colors (red/orange).
+  - Registration flows successfully create a user and redirect to the feed.
+  - **Error Styling:** Invalid credentials now correctly trigger an error message styled in **RED**, significantly improving the UX over the previous green styling.
 
 ### Topic Management
 - **Status: Functional**
 - **Observations:**
   - Topic chips (All Feed, AI Agents, Business & Funding, Hardware & Chips, Models & Research, Policy & Safety, Tools & Products) are clearly visible and function as filters.
   - Selecting a topic properly filters the feed.
-  - A "Follow Topic" button dynamically appears when a specific topic is selected.
 
 ### Saving & Interacting
-- **Status: Functional**
+- **Status: FAILING (Regression)**
 - **Observations:**
-  - Articles display a clear "Save for later" bookmark icon.
-  - A dedicated "Saved Articles" page is accessible from the top navigation (once logged in).
+  - Clicking the "Save for later" button currently fails (console logs show `Failed to save article`).
+  - Navigating to the "Saved Articles" page (`/saved`) correctly displays the empty state ("No saved items. You haven't bookmarked any signals yet."), but the ability to actually save items is currently broken.
 
 ---
 
 ## 3. Areas for Improvement (Recommendations)
 
-Based on the evaluation, here is what can be improved for the next iteration:
-
-1. **Remove Vercel Deployment Protection:** If this is a portfolio piece meant for reviewers, disable Vercel Authentication in your project settings so the public URL is accessible.
-2. **Graceful Image Fallbacks:** The GNews API frequently returns invalid or hotlink-protected image URLs. Implement an `onError` handler on the Next.js `<Image>` component to fall back to a default placeholder or hide the image container entirely when a load fails.
-3. **Refine Auth UX:**
-   - Fix the color of error messages in the Auth modal (currently green for an error).
-   - Ensure the transition between "Create Account" and successful login is seamless without flashing false authentication errors.
-4. **Deduplication Logic:** The system relies on exact title-hashes. In the news aggregation space, publishers often rewrite titles. Moving toward a lightweight embedding-based deduplication (or fuzzy string matching) would significantly reduce the redundancy in the feed.
-5. **Rate Limit Resilience:** GNews has a strict 100 requests/day limit on free tiers. Ensure the Vercel Cron job ingestion frequency is tuned so it doesn't exhaust the quota, and handle API exhaustion gracefully (e.g., don't wipe the DB, just serve stale news).
+1. **Fix Save Functionality:** Investigate why saving articles is currently failing. Check Supabase Row Level Security (RLS) policies on the `saved_articles` table or backend endpoint configurations.
+2. **Remove Vercel Deployment Protection:** If this is a portfolio piece meant for reviewers, disable Vercel Authentication in your project settings so the public URL is accessible.
